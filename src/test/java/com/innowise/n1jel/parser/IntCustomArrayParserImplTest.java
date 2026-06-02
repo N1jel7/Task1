@@ -16,12 +16,12 @@ public class IntCustomArrayParserImplTest {
     }
 
     @Test
-    void shouldParseValidLineWithCommas() {
+    void shouldParseIntFromStringValidLineWithCommas() {
         // given
         String line = "1, 2, 3";
 
         // when
-        Optional<int[]> result = parser.parse(line);
+        Optional<int[]> result = parser.parseIntFromString(line);
 
         // then
         assertTrue(result.isPresent());
@@ -34,7 +34,7 @@ public class IntCustomArrayParserImplTest {
         String line = "1, x, 3";
 
         // when
-        Optional<int[]> result = parser.parse(line);
+        Optional<int[]> result = parser.parseIntFromString(line);
 
         // then
         assertFalse(result.isPresent());

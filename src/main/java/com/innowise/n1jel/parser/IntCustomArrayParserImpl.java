@@ -12,33 +12,33 @@ public class IntCustomArrayParserImpl implements IntCustomArrayParser {
     private static final Pattern SEPARATOR_PATTERN = Pattern.compile("[,;\\-\\s]+");
 
     @Override
-    public Optional<int[]> parse(String line) {
+    public Optional<int[]> parseIntFromString(String line) {
         if (line == null || line.trim().isEmpty()) {
             log.debug("Line is null or empty");
             return Optional.empty();
         }
 
         String trimmedLine = line.trim();
-        String[] tokens = SEPARATOR_PATTERN.split(trimmedLine);
+        String[] elements = SEPARATOR_PATTERN.split(trimmedLine);
 
-        if (tokens.length == 0) {
-            log.debug("No tokens found in line: {}", trimmedLine);
+        if (elements.length == 0) {
+            log.debug("No elements found in line: {}", trimmedLine);
             return Optional.empty();
         }
 
-        int[] numbers = new int[tokens.length];
+        int[] numbers = new int[elements.length];
 
-        for (int i = 0; i < tokens.length; i++) {
-            String token = tokens[i].trim();
+        for (int i = 0; i < elements.length; i++) {
+            String element = elements[i].trim();
 
-            if (token.isEmpty()) {
+            if (element.isEmpty()) {
                 return Optional.empty();
             }
 
             try {
-                numbers[i] = Integer.parseInt(token);
+                numbers[i] = Integer.parseInt(element);
             } catch (NumberFormatException exception) {
-                log.debug("Failed to parse token: {} as int", token);
+                log.debug("Failed to parse element: {} as int", element);
                 return Optional.empty();
             }
         }

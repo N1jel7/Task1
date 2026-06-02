@@ -59,9 +59,6 @@ public class IntCustomArray {
 
     @Override
     public String toString() {
-        return "IntCustomArray{" +
-                "array =" + Arrays.toString(array) +
-                ", length=" + length +
-                '}';
+        return "IntCustomArray{" + "array =" + Arrays.toString(array) + ", length=" + length + '}';
     }
 }

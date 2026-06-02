@@ -5,9 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import java.net.URL;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,12 +22,12 @@ public class CustomArrayReaderImplTest {
     }
 
     @Test
-    void shouldReadLinesFromResourceFile() throws Exception {
+    void shouldReadAllLinesFromFile() throws Exception {
         // given
         String path = "data/input.txt";
 
         // when
-        List<String> lines = reader.readLines(path);
+        List<String> lines = reader.readAllLinesFromFile(path);
 
         // then
         assertNotNull(lines);
@@ -40,7 +38,7 @@ public class CustomArrayReaderImplTest {
     void shouldThrowExceptionWhenFileNotFound() {
         // when & then
         assertThrows(CustomArrayException.class, () -> {
-            reader.readLines("non_existent_file.txt");
+            reader.readAllLinesFromFile("non_existent_file.txt");
         });
     }
 }

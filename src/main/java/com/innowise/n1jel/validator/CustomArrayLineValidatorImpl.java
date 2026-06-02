@@ -12,7 +12,7 @@ public class CustomArrayLineValidatorImpl implements CustomArrayLineValidator{
     }
 
     @Override
-    public boolean validate(String line) {
+    public boolean isValidLine(String line) {
         if (line == null || line.trim().isEmpty()) {
             return false;
         }

@@ -16,7 +16,7 @@ public class CustomArrayReaderImpl implements CustomArrayReader {
     private static final Logger log = LogManager.getLogger(CustomArrayReaderImpl.class);
 
     @Override
-    public List<String> readLines(String path) {
+    public List<String> readAllLinesFromFile(String path) {
         try {
             URL resource = CustomArrayReaderImpl.class.getClassLoader().getResource(path);
 
