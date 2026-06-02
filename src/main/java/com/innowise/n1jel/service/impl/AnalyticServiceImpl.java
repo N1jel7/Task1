@@ -1,0 +1,91 @@
+package com.innowise.n1jel.service.impl;
+
+import com.innowise.n1jel.entity.IntCustomArray;
+import com.innowise.n1jel.service.AnalyticService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Optional;
+
+public class AnalyticServiceImpl implements AnalyticService {
+
+    private static final Logger log = LogManager.getLogger(AnalyticServiceImpl.class);
+
+    @Override
+    public Optional<Integer> findMinValue(IntCustomArray intCustomArray) {
+        if (intCustomArray == null || intCustomArray.isEmpty()) {
+            log.debug("Array is null or empty, cannot find min value");
+            return Optional.empty();
+        }
+
+        int[] array = intCustomArray.getArray();
+        int min = array[0];
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
+
+        log.debug("Min value found: {}", min);
+        return Optional.of(min);
+    }
+
+    @Override
+    public Optional<Integer> findMaxValue(IntCustomArray intCustomArray) {
+        if (intCustomArray == null || intCustomArray.isEmpty()) {
+            log.debug("Array is null or empty, cannot find max value");
+            return Optional.empty();
+        }
+
+        int[] array = intCustomArray.getArray();
+        int max = array[0];
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+
+        log.debug("Max value found: {}", max);
+        return Optional.of(max);
+    }
+
+    @Override
+    public Optional<Integer> calculateSumOfElements(IntCustomArray intCustomArray) {
+        if (intCustomArray == null || intCustomArray.isEmpty()) {
+            log.debug("Array is null or empty, cannot calculate sum");
+            return Optional.empty();
+        }
+
+        int[] array = intCustomArray.getArray();
+        int sum = 0;
+
+        for (int value : array) {
+            sum += value;
+        }
+
+        log.debug("Sum calculated: {}", sum);
+        return Optional.of(sum);
+    }
+
+    @Override
+    public Optional<Double> calculateAverageOfElements(IntCustomArray intCustomArray) {
+        if (intCustomArray == null || intCustomArray.isEmpty()) {
+            log.debug("Array is null or empty, cannot calculate average");
+            return Optional.empty();
+        }
+
+        int[] array = intCustomArray.getArray();
+        int sum = 0;
+
+        for (int value : array) {
+            sum += value;
+        }
+
+        double average = (double) sum / array.length;
+
+        log.debug("Average calculated: {}", average);
+        return Optional.of(average);
+    }
+}
