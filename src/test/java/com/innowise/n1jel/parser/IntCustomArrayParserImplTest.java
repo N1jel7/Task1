@@ -8,15 +8,15 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IntCustomArrayParserImplTest {
-    private IntCustomArrayParserImpl parser;
+    private CustomArrayParserImpl parser;
 
     @BeforeEach
     void setUp() {
-        parser = new IntCustomArrayParserImpl();
+        parser = new CustomArrayParserImpl();
     }
 
     @Test
-    void shouldParseIntFromStringValidLineWithCommas() {
+    void shouldParseValidLineWithCommas() {
         // given
         String line = "1, 2, 3";
 
@@ -29,7 +29,7 @@ public class IntCustomArrayParserImplTest {
     }
 
     @Test
-    void shouldReturnEmptyForInvalidLine() {
+    void shouldReturnEmptyForInvalidLineWithLetters() {
         // given
         String line = "1, x, 3";
 

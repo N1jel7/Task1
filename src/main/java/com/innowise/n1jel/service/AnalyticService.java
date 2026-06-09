@@ -1,15 +1,15 @@
 package com.innowise.n1jel.service;
 
-import com.innowise.n1jel.entity.IntCustomArray;
+import com.innowise.n1jel.entity.CustomArray;
 
 import java.util.Optional;
 
 public interface AnalyticService {
-    Optional<Integer> findMinValue(IntCustomArray intCustomArray);
+    Optional<Integer> findMinValue(CustomArray intCustomArray);
 
-    Optional<Integer> findMaxValue(IntCustomArray intCustomArray);
+    Optional<Integer> findMaxValue(CustomArray intCustomArray);
 
-    Optional<Integer> calculateSumOfElements(IntCustomArray intCustomArray);
+    Optional<Integer> calculateSumOfElements(CustomArray intCustomArray);
 
-    Optional<Double> calculateAverageOfElements(IntCustomArray intCustomArray);
+    Optional<Double> calculateAverageOfElements(CustomArray intCustomArray);
 }

@@ -16,7 +16,7 @@ public class CustomArrayReaderImpl implements CustomArrayReader {
     private static final Logger log = LogManager.getLogger(CustomArrayReaderImpl.class);
 
     @Override
-    public List<String> readAllLinesFromFile(String path) {
+    public List<String> readAllLinesFromFile(String path) throws CustomArrayException {
         try {
             URL resource = CustomArrayReaderImpl.class.getClassLoader().getResource(path);
 
@@ -31,7 +31,7 @@ public class CustomArrayReaderImpl implements CustomArrayReader {
 
         } catch (IOException | URISyntaxException exception) {
             log.error("Failed to read file: {}", path, exception);
-            throw new CustomArrayException("Failed to read file: " + path);
+            throw new CustomArrayException("Failed to read file: " + path, exception);
         }
     }
 }

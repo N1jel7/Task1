@@ -1,6 +1,6 @@
 package com.innowise.n1jel.service.impl;
 
-import com.innowise.n1jel.entity.IntCustomArray;
+import com.innowise.n1jel.entity.CustomArray;
 import com.innowise.n1jel.service.AnalyticService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,7 +12,7 @@ public class AnalyticServiceImpl implements AnalyticService {
     private static final Logger log = LogManager.getLogger(AnalyticServiceImpl.class);
 
     @Override
-    public Optional<Integer> findMinValue(IntCustomArray intCustomArray) {
+    public Optional<Integer> findMinValue(CustomArray intCustomArray) {
         if (intCustomArray == null || intCustomArray.isEmpty()) {
             log.debug("Array is null or empty, cannot find min value");
             return Optional.empty();
@@ -32,7 +32,7 @@ public class AnalyticServiceImpl implements AnalyticService {
     }
 
     @Override
-    public Optional<Integer> findMaxValue(IntCustomArray intCustomArray) {
+    public Optional<Integer> findMaxValue(CustomArray intCustomArray) {
         if (intCustomArray == null || intCustomArray.isEmpty()) {
             log.debug("Array is null or empty, cannot find max value");
             return Optional.empty();
@@ -52,7 +52,7 @@ public class AnalyticServiceImpl implements AnalyticService {
     }
 
     @Override
-    public Optional<Integer> calculateSumOfElements(IntCustomArray intCustomArray) {
+    public Optional<Integer> calculateSumOfElements(CustomArray intCustomArray) {
         if (intCustomArray == null || intCustomArray.isEmpty()) {
             log.debug("Array is null or empty, cannot calculate sum");
             return Optional.empty();
@@ -70,7 +70,7 @@ public class AnalyticServiceImpl implements AnalyticService {
     }
 
     @Override
-    public Optional<Double> calculateAverageOfElements(IntCustomArray intCustomArray) {
+    public Optional<Double> calculateAverageOfElements(CustomArray intCustomArray) {
         if (intCustomArray == null || intCustomArray.isEmpty()) {
             log.debug("Array is null or empty, cannot calculate average");
             return Optional.empty();

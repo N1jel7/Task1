@@ -1,6 +1,7 @@
 package com.innowise.n1jel.service.impl;
 
-import com.innowise.n1jel.entity.IntCustomArray;
+import com.innowise.n1jel.entity.CustomArray;
+import com.innowise.n1jel.exception.CustomArrayException;
 import com.innowise.n1jel.service.SortService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +11,7 @@ public class SortServiceImpl implements SortService {
     private static final Logger log = LogManager.getLogger(SortServiceImpl.class);
 
     @Override
-    public void bubbleSort(IntCustomArray intCustomArray) {
+    public void bubbleSort(CustomArray intCustomArray) throws CustomArrayException {
         if (intCustomArray == null || intCustomArray.isEmpty()) {
             log.debug("Array is null or empty, nothing to sort");
             return;
@@ -45,7 +46,7 @@ public class SortServiceImpl implements SortService {
     }
 
     @Override
-    public void quickSort(IntCustomArray intCustomArray) {
+    public void quickSort(CustomArray intCustomArray) throws CustomArrayException {
         if (intCustomArray == null || intCustomArray.isEmpty()) {
             log.debug("Array is null or empty, nothing to sort");
             return;

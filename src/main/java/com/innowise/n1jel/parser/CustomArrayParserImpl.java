@@ -6,8 +6,8 @@ import org.apache.logging.log4j.Logger;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-public class IntCustomArrayParserImpl implements IntCustomArrayParser {
-    private static final Logger log = LogManager.getLogger(IntCustomArrayParserImpl.class);
+public class CustomArrayParserImpl implements CustomArrayParser {
+    private static final Logger log = LogManager.getLogger(CustomArrayParserImpl.class);
 
     private static final Pattern SEPARATOR_PATTERN = Pattern.compile("[,;\\-\\s]+");
 

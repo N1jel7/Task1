@@ -1,14 +1,48 @@
-18:16:14.810 [main] DEBUG com.innowise.n1jel.service.impl.SortServiceImpl - Bubble sort completed
-18:16:14.813 [main] INFO  com.innowise.n1jel.app.Main - After bubble sort: [3, 4, 7]
-18:16:14.813 [main] INFO  com.innowise.n1jel.app.Main - Processing array: [11, 2, 42]
-18:16:14.814 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Min value found: 2
-18:16:14.814 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Max value found: 42
-18:16:14.814 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Sum calculated: 55
-18:16:14.814 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Average calculated: 18.333333333333332
-18:16:14.814 [main] INFO  com.innowise.n1jel.app.Main - Min: 2
-18:16:14.815 [main] INFO  com.innowise.n1jel.app.Main - Max: 42
-18:16:14.815 [main] INFO  com.innowise.n1jel.app.Main - Sum: 55
-18:16:14.815 [main] INFO  com.innowise.n1jel.app.Main - Average: 18.333333333333332
-18:16:14.815 [main] DEBUG com.innowise.n1jel.service.impl.SortServiceImpl - Bubble sort completed
-18:16:14.815 [main] INFO  com.innowise.n1jel.app.Main - After bubble sort: [2, 11, 42]
-18:16:14.815 [main] INFO  com.innowise.n1jel.app.Main - Application finished
+18:50:42.163 [main] DEBUG com.innowise.n1jel.repository.impl.CustomArrayRepositoryImpl - Complete repository cleanup
+18:50:42.165 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Completely delete statistics
+18:50:42.165 [main] DEBUG com.innowise.n1jel.repository.impl.CustomArrayRepositoryImpl - Adding array to repository: id=fae30927-6506-48f8-b63c-853c40189fc9
+18:50:42.165 [main] DEBUG com.innowise.n1jel.observer.impl.CustomArrayObserverImpl - Recalculating statistics for array id: fae30927-6506-48f8-b63c-853c40189fc9
+18:50:42.165 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Min value found: 1
+18:50:42.165 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Max value found: 2
+18:50:42.166 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Sum calculated: 3
+18:50:42.166 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Average calculated: 1.5
+18:50:42.166 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics stored for array id: fae30927-6506-48f8-b63c-853c40189fc9 -> min=1, max=2, sum=3, average=1.5
+18:50:42.166 [main] DEBUG com.innowise.n1jel.observer.impl.CustomArrayObserverImpl - Statistics updated for array fae30927-6506-48f8-b63c-853c40189fc9: min=1, max=2, sum=3, average=1.5
+18:50:42.166 [main] DEBUG com.innowise.n1jel.repository.impl.CustomArrayRepositoryImpl - Adding array to repository: id=bd96ad27-496c-4704-842c-2dd2d3288138
+18:50:42.166 [main] DEBUG com.innowise.n1jel.observer.impl.CustomArrayObserverImpl - Recalculating statistics for array id: bd96ad27-496c-4704-842c-2dd2d3288138
+18:50:42.166 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Min value found: 3
+18:50:42.166 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Max value found: 5
+18:50:42.166 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Sum calculated: 12
+18:50:42.166 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Average calculated: 4.0
+18:50:42.166 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics stored for array id: bd96ad27-496c-4704-842c-2dd2d3288138 -> min=3, max=5, sum=12, average=4.0
+18:50:42.166 [main] DEBUG com.innowise.n1jel.observer.impl.CustomArrayObserverImpl - Statistics updated for array bd96ad27-496c-4704-842c-2dd2d3288138: min=3, max=5, sum=12, average=4.0
+18:50:42.170 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Min value found: 1
+18:50:42.171 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Array is null or empty, cannot calculate sum
+18:50:42.173 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Average calculated: 3.0
+18:50:42.174 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Max value found: 9
+18:50:42.176 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Array is null or empty, cannot find min value
+18:50:42.178 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Sum calculated: 15
+18:50:42.179 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Array is null or empty, cannot calculate average
+18:50:42.181 [main] DEBUG com.innowise.n1jel.service.impl.AnalyticServiceImpl - Array is null or empty, cannot find max value
+18:50:42.185 [main] DEBUG com.innowise.n1jel.service.impl.SortServiceImpl - Quick sort completed
+18:50:42.186 [main] DEBUG com.innowise.n1jel.service.impl.SortServiceImpl - Bubble sort completed
+18:50:42.187 [main] DEBUG com.innowise.n1jel.service.impl.SortServiceImpl - Bubble sort completed
+18:50:42.189 [main] DEBUG com.innowise.n1jel.service.impl.SortServiceImpl - Quick sort completed
+18:50:42.201 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Completely delete statistics
+18:50:42.202 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics stored for array id: 87e9acf7-5fa7-4522-8d70-65c4a6e597fb -> min=1, max=10, sum=55, average=5.5
+18:50:42.202 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics retrieved for array id: 87e9acf7-5fa7-4522-8d70-65c4a6e597fb
+18:50:42.203 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Completely delete statistics
+18:50:42.203 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - No statistics found for array id: 18d4386e-a131-4947-8dab-9fc2a7fc6c59
+18:50:42.205 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Completely delete statistics
+18:50:42.205 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics stored for array id: 05092935-6029-47b0-9a0e-7bb924a202e7 -> min=1, max=10, sum=55, average=5.5
+18:50:42.205 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics removed for array id: 05092935-6029-47b0-9a0e-7bb924a202e7
+18:50:42.206 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - No statistics found for array id: 05092935-6029-47b0-9a0e-7bb924a202e7
+18:50:42.206 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Completely delete statistics
+18:50:42.206 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics stored for array id: 33dc3b3b-386d-4cf4-a9cd-ab55aaa92191 -> min=1, max=5, sum=15, average=3.0
+18:50:42.207 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics stored for array id: 46a3cea5-0963-4525-af4c-48584a9ac704 -> min=2, max=8, sum=20, average=4.0
+18:50:42.207 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics retrieved for array id: 33dc3b3b-386d-4cf4-a9cd-ab55aaa92191
+18:50:42.207 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics retrieved for array id: 46a3cea5-0963-4525-af4c-48584a9ac704
+18:50:42.208 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Completely delete statistics
+18:50:42.209 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics stored for array id: 06aada41-a077-4e99-a016-60d354b8d949 -> min=1, max=10, sum=55, average=5.5
+18:50:42.209 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics stored for array id: 06aada41-a077-4e99-a016-60d354b8d949 -> min=2, max=20, sum=110, average=11.0
+18:50:42.209 [main] DEBUG com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl - Statistics retrieved for array id: 06aada41-a077-4e99-a016-60d354b8d949

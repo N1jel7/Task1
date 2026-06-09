@@ -1,8 +1,9 @@
 package com.innowise.n1jel.app;
 
-import com.innowise.n1jel.entity.IntCustomArray;
-import com.innowise.n1jel.factory.IntCustomArrayFactoryImpl;
-import com.innowise.n1jel.parser.IntCustomArrayParserImpl;
+import com.innowise.n1jel.entity.CustomArray;
+import com.innowise.n1jel.exception.CustomArrayException;
+import com.innowise.n1jel.factory.CustomArrayFactoryImpl;
+import com.innowise.n1jel.parser.CustomArrayParserImpl;
 import com.innowise.n1jel.reader.CustomArrayReader;
 import com.innowise.n1jel.reader.CustomArrayReaderImpl;
 import com.innowise.n1jel.service.AnalyticService;
@@ -21,7 +22,7 @@ public class Main {
 
     private final static Logger log = LogManager.getLogger(Main.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CustomArrayException {
         log.info("Application started");
 
         // 1. Read file
@@ -30,16 +31,16 @@ public class Main {
 
         // 2. Validate and parse
         CustomArrayLineValidatorImpl validator = new CustomArrayLineValidatorImpl();
-        IntCustomArrayParserImpl parser = new IntCustomArrayParserImpl();
-        IntCustomArrayFactoryImpl factory = new IntCustomArrayFactoryImpl();
+        CustomArrayParserImpl parser = new CustomArrayParserImpl();
+        CustomArrayFactoryImpl factory = new CustomArrayFactoryImpl();
 
-        List<IntCustomArray> arrays = new ArrayList<>();
+        List<CustomArray> arrays = new ArrayList<>();
 
         for (String line : lines) {
             if (validator.isValidLine(line)) {
                 Optional<int[]> parsedData = parser.parseIntFromString(line);
                 if (parsedData.isPresent()) {
-                    IntCustomArray array = factory.createCustomArray(parsedData.get());
+                    CustomArray array = factory.createCustomArray(parsedData.get());
                     arrays.add(array);
                     log.info("Created array: {}", array);
                 }
@@ -52,7 +53,7 @@ public class Main {
         AnalyticService analyticService = new AnalyticServiceImpl();
         SortService sortService = new SortServiceImpl();
 
-        for (IntCustomArray array : arrays) {
+        for (CustomArray array : arrays) {
             log.info("Processing array: {}", array.getArray());
 
             // Find min and max

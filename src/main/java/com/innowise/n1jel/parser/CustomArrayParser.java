@@ -2,6 +2,6 @@ package com.innowise.n1jel.parser;
 
 import java.util.Optional;
 
-public interface IntCustomArrayParser {
+public interface CustomArrayParser {
     Optional<int[]> parseIntFromString(String line);
 }

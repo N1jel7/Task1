@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -35,10 +37,26 @@ public class CustomArrayReaderImplTest {
     }
 
     @Test
+    void shouldReadLinesFromExistingFile() throws CustomArrayException {
+        // given
+        String filePath = "data/test.txt";
+
+        // when
+        List<String> lines = reader.readAllLinesFromFile(filePath);
+
+        // then
+        assertNotNull(lines);
+        assertTrue(lines.size() > 0);
+    }
+
+    @Test
     void shouldThrowExceptionWhenFileNotFound() {
+        // given
+        String nonExistentFile = "non_existent_file.txt";
+
         // when & then
         assertThrows(CustomArrayException.class, () -> {
-            reader.readAllLinesFromFile("non_existent_file.txt");
+            reader.readAllLinesFromFile(nonExistentFile);
         });
     }
 }

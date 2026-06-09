@@ -1,10 +1,11 @@
 package com.innowise.n1jel.service;
 
-import com.innowise.n1jel.entity.IntCustomArray;
+import com.innowise.n1jel.entity.CustomArray;
+import com.innowise.n1jel.exception.CustomArrayException;
 
 public interface SortService {
 
-    void bubbleSort(IntCustomArray intCustomArray);
+    void bubbleSort(CustomArray intCustomArray) throws CustomArrayException;
 
-    void quickSort(IntCustomArray intCustomArray);
+    void quickSort(CustomArray intCustomArray) throws CustomArrayException;
 }
