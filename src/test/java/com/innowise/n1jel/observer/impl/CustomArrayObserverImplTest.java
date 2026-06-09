@@ -75,7 +75,7 @@ public class CustomArrayObserverImplTest {
         int[] data = {5, 2, 8};
         CustomArray array = new CustomArray(data);
 
-        // ✅ Add to repository (auto-registers observer)
+        // Add to repository
         repository.add(array);
 
         // then - verify initial stats (already calculated by repository)
