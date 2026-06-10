@@ -30,7 +30,7 @@ public class CustomArrayWarehouseImpl implements CustomArrayWarehouse {
     }
 
     @Override
-    public void put(UUID id, ArrayStatistic calculation) {
+    public void putStatistic(UUID id, ArrayStatistic calculation) {
         statistics.put(id, calculation);
         log.debug("Statistics stored for array id: {} -> min={}, max={}, sum={}, average={}",
                 id, calculation.min(), calculation.max(), calculation.sum(), calculation.average());

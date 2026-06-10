@@ -8,18 +8,15 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomArrayComparatorImplTest {
-    private CustomArrayComparator comparator;
+    private final CustomArrayComparator comparator = new CustomArrayComparatorImpl();
     private List<CustomArray> arrays;
 
     @BeforeEach
     void setUp() {
-        comparator = new CustomArrayComparatorImpl();
         arrays = new ArrayList<>();
-
         arrays.add(new CustomArray(new int[]{5, 2, 3}));
         arrays.add(new CustomArray(new int[]{1, 4}));
         arrays.add(new CustomArray(new int[]{9, 0, 1, 2}));
@@ -33,8 +30,10 @@ public class CustomArrayComparatorImplTest {
                 .toList();
 
         // then
-        assertTrue(sorted.get(0).getId().compareTo(sorted.get(1).getId()) < 0);
-        assertTrue(sorted.get(1).getId().compareTo(sorted.get(2).getId()) < 0);
+        assertAll("Sorting by ID validation",
+                () -> assertTrue(sorted.get(0).getId().compareTo(sorted.get(1).getId()) < 0),
+                () -> assertTrue(sorted.get(1).getId().compareTo(sorted.get(2).getId()) < 0)
+        );
     }
 
     @Test
@@ -45,9 +44,11 @@ public class CustomArrayComparatorImplTest {
                 .toList();
 
         // then
-        assertEquals(2, sorted.get(0).getLength());
-        assertEquals(3, sorted.get(1).getLength());
-        assertEquals(4, sorted.get(2).getLength());
+        assertAll("Sorting by length validation",
+                () -> assertEquals(2, sorted.get(0).getLength()),
+                () -> assertEquals(3, sorted.get(1).getLength()),
+                () -> assertEquals(4, sorted.get(2).getLength())
+        );
     }
 
     @Test
@@ -58,9 +59,11 @@ public class CustomArrayComparatorImplTest {
                 .toList();
 
         // then
-        assertEquals(1, sorted.get(0).getArray()[0]);
-        assertEquals(5, sorted.get(1).getArray()[0]);
-        assertEquals(9, sorted.get(2).getArray()[0]);
+        assertAll("Sorting by first element validation",
+                () -> assertEquals(1, sorted.get(0).getArray()[0]),
+                () -> assertEquals(5, sorted.get(1).getArray()[0]),
+                () -> assertEquals(9, sorted.get(2).getArray()[0])
+        );
     }
 
     @Test
@@ -75,6 +78,8 @@ public class CustomArrayComparatorImplTest {
                 .toList();
 
         // then
-        assertTrue(sorted.get(0).isEmpty());
+        assertAll("Empty array handling validation",
+                () -> assertTrue(sorted.get(0).isEmpty())
+        );
     }
 }

@@ -15,6 +15,9 @@ public class IdSpecification implements CustomArraySpecification {
 
     @Override
     public boolean specify(CustomArray intCustomArray) {
+        if (intCustomArray == null) {
+            return false;
+        }
         UUID entityId = intCustomArray.getId();
         return id.equals(entityId);
     }

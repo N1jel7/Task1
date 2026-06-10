@@ -4,8 +4,8 @@ import com.innowise.n1jel.entity.ArrayStatistic;
 import com.innowise.n1jel.entity.CustomArray;
 import com.innowise.n1jel.exception.CustomArrayException;
 import com.innowise.n1jel.observer.CustomArrayObserver;
-import com.innowise.n1jel.service.AnalyticService;
-import com.innowise.n1jel.service.impl.AnalyticServiceImpl;
+import com.innowise.n1jel.service.StatisticService;
+import com.innowise.n1jel.service.impl.StatisticServiceImpl;
 import com.innowise.n1jel.warehouse.CustomArrayWarehouse;
 import com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl;
 import org.apache.logging.log4j.LogManager;
@@ -15,11 +15,11 @@ public class CustomArrayObserverImpl implements CustomArrayObserver {
 
     private static final Logger log = LogManager.getLogger(CustomArrayObserverImpl.class);
 
-    private final AnalyticService analyticService;
+    private final StatisticService analyticService;
     private final CustomArrayWarehouse warehouse;
 
     public CustomArrayObserverImpl() {
-        this.analyticService = new AnalyticServiceImpl();
+        this.analyticService = new StatisticServiceImpl();
         this.warehouse = CustomArrayWarehouseImpl.getInstance();
     }
 
@@ -33,7 +33,7 @@ public class CustomArrayObserverImpl implements CustomArrayObserver {
         if (array.isEmpty()) {
             log.debug("Array is empty, updating warehouse with zero values");
             ArrayStatistic emptyCalculation = new ArrayStatistic(0, 0, 0, 0.0);
-            warehouse.put(array.getId(), emptyCalculation);
+            warehouse.putStatistic(array.getId(), emptyCalculation);
             return;
         }
 
@@ -53,7 +53,7 @@ public class CustomArrayObserverImpl implements CustomArrayObserver {
                     new CustomArrayException("Failed to calculate average for array: " + array.getId()));
 
             ArrayStatistic calculation = new ArrayStatistic(min, max, sum, average);
-            warehouse.put(array.getId(), calculation);
+            warehouse.putStatistic(array.getId(), calculation);
 
             log.debug("Statistics updated for array {}: min={}, max={}, sum={}, average={}",
                     array.getId(), min, max, sum, average);

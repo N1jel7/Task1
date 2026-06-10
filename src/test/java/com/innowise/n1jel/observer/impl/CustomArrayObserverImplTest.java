@@ -12,19 +12,15 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomArrayObserverImplTest {
-    private CustomArrayObserver observer;
-    private CustomArrayWarehouse warehouse;
-    private CustomArrayRepository repository;
+    private final CustomArrayObserver observer = new CustomArrayObserverImpl();
+    private final CustomArrayWarehouse warehouse = CustomArrayWarehouseImpl.getInstance();
+    private final CustomArrayRepository repository = CustomArrayRepositoryImpl.getInstance();
 
     @BeforeEach
     void setUp() {
-        observer = new CustomArrayObserverImpl();
-        warehouse = CustomArrayWarehouseImpl.getInstance();
-        repository = CustomArrayRepositoryImpl.getInstance();
         warehouse.clear(); // Clear warehouse before each test
     }
 
@@ -39,11 +35,14 @@ public class CustomArrayObserverImplTest {
 
         // then
         Optional<ArrayStatistic> statistic = warehouse.getStatistic(array.getId());
-        assertTrue(statistic.isPresent());
-        assertEquals(1, statistic.get().min());
-        assertEquals(9, statistic.get().max());
-        assertEquals(25, statistic.get().sum());
-        assertEquals(5.0, statistic.get().average(), 0.001);
+
+        assertAll("Statistics calculation validation",
+                () -> assertTrue(statistic.isPresent()),
+                () -> assertEquals(1, statistic.get().min()),
+                () -> assertEquals(9, statistic.get().max()),
+                () -> assertEquals(25, statistic.get().sum()),
+                () -> assertEquals(5.0, statistic.get().average(), 0.001)
+        );
     }
 
     @Test
@@ -56,17 +55,22 @@ public class CustomArrayObserverImplTest {
 
         // then
         Optional<ArrayStatistic> statistic = warehouse.getStatistic(emptyArray.getId());
-        assertTrue(statistic.isPresent());
-        assertEquals(0, statistic.get().min());
-        assertEquals(0, statistic.get().max());
-        assertEquals(0, statistic.get().sum());
-        assertEquals(0.0, statistic.get().average(), 0.001);
+
+        assertAll("Empty array statistics validation",
+                () -> assertTrue(statistic.isPresent()),
+                () -> assertEquals(0, statistic.get().min()),
+                () -> assertEquals(0, statistic.get().max()),
+                () -> assertEquals(0, statistic.get().sum()),
+                () -> assertEquals(0.0, statistic.get().average(), 0.001)
+        );
     }
 
     @Test
     void shouldHandleNullArray() {
         // when & then (no exception)
-        observer.customArrayChanged(null);
+        assertAll("Null array handling",
+                () -> assertDoesNotThrow(() -> observer.customArrayChanged(null))
+        );
     }
 
     @Test
@@ -87,6 +91,10 @@ public class CustomArrayObserverImplTest {
 
         // then - verify updated stats (auto-updated via observer)
         ArrayStatistic updatedStat = warehouse.getStatistic(array.getId()).get();
-        assertEquals(110, updatedStat.sum());
+
+        assertAll("Statistics update validation",
+                () -> assertEquals(110, updatedStat.sum()),
+                () -> assertNotEquals(initialStat.sum(), updatedStat.sum())
+        );
     }
 }

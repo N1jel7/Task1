@@ -3,8 +3,8 @@ package com.innowise.n1jel.repository;
 import com.innowise.n1jel.comparator.impl.CustomArrayComparatorImpl;
 import com.innowise.n1jel.entity.CustomArray;
 import com.innowise.n1jel.repository.impl.CustomArrayRepositoryImpl;
-import com.innowise.n1jel.service.AnalyticService;
-import com.innowise.n1jel.service.impl.AnalyticServiceImpl;
+import com.innowise.n1jel.service.StatisticService;
+import com.innowise.n1jel.service.impl.StatisticServiceImpl;
 import com.innowise.n1jel.warehouse.CustomArrayWarehouse;
 import com.innowise.n1jel.warehouse.impl.CustomArrayWarehouseImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,16 +15,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomArrayRepositoryImplTest {
-    private CustomArrayRepository repository;
-    private CustomArrayWarehouse warehouse;
-    private AnalyticService analyticService;
+    private final CustomArrayRepository repository = CustomArrayRepositoryImpl.getInstance();
+    private final CustomArrayWarehouse warehouse = CustomArrayWarehouseImpl.getInstance();
+    private final StatisticService analyticService = new StatisticServiceImpl();
 
     @BeforeEach
     void setUp() {
-        repository = CustomArrayRepositoryImpl.getInstance();
-        warehouse = CustomArrayWarehouseImpl.getInstance();
-        analyticService = new AnalyticServiceImpl();
-
         repository.clear();
         warehouse.clear();
     }
@@ -38,9 +34,11 @@ public class CustomArrayRepositoryImplTest {
         boolean result = repository.add(array);
 
         // then
-        assertTrue(result);
-        assertEquals(1, repository.size());
-        assertTrue(warehouse.getStatistic(array.getId()).isPresent());
+        assertAll("Add array validation",
+                () -> assertTrue(result),
+                () -> assertEquals(1, repository.size()),
+                () -> assertTrue(warehouse.getStatistic(array.getId()).isPresent())
+        );
     }
 
     @Test
@@ -53,9 +51,11 @@ public class CustomArrayRepositoryImplTest {
         boolean result = repository.remove(array);
 
         // then
-        assertTrue(result);
-        assertEquals(0, repository.size());
-        assertFalse(warehouse.getStatistic(array.getId()).isPresent());
+        assertAll("Remove array validation",
+                () -> assertTrue(result),
+                () -> assertEquals(0, repository.size()),
+                () -> assertFalse(warehouse.getStatistic(array.getId()).isPresent())
+        );
     }
 
     @Test
@@ -86,8 +86,10 @@ public class CustomArrayRepositoryImplTest {
         });
 
         // then
-        assertEquals(1, result.size());
-        assertEquals(array2.getId(), result.get(0).getId());
+        assertAll("Query by sum specification validation",
+                () -> assertEquals(1, result.size()),
+                () -> assertEquals(array2.getId(), result.get(0).getId())
+        );
     }
 
     @Test
@@ -102,7 +104,11 @@ public class CustomArrayRepositoryImplTest {
         List<CustomArray> sorted = repository.sort(new CustomArrayComparatorImpl().byId());
 
         // then
-        assertTrue(sorted.get(0).getId().compareTo(sorted.get(1).getId()) < 0);
+        assertAll("Sort by ID validation",
+                () -> assertTrue(sorted.get(0).getId().compareTo(sorted.get(1).getId()) < 0),
+                () -> assertNotNull(sorted.get(0).getId()),
+                () -> assertNotNull(sorted.get(1).getId())
+        );
     }
 
     @Test
@@ -117,8 +123,11 @@ public class CustomArrayRepositoryImplTest {
         List<CustomArray> sorted = repository.sort(new CustomArrayComparatorImpl().byLength());
 
         // then
-        assertEquals(3, sorted.get(0).getLength());
-        assertEquals(4, sorted.get(1).getLength());
+        assertAll("Sort by length validation",
+                () -> assertEquals(3, sorted.get(0).getLength()),
+                () -> assertEquals(4, sorted.get(1).getLength()),
+                () -> assertTrue(sorted.get(0).getLength() < sorted.get(1).getLength())
+        );
     }
 
     @Test
@@ -136,8 +145,11 @@ public class CustomArrayRepositoryImplTest {
         });
 
         // then
-        assertEquals(1, result.size());
-        assertEquals(array1.getId(), result.get(0).getId());
+        assertAll("Query by min value specification validation",
+                () -> assertEquals(1, result.size()),
+                () -> assertEquals(array1.getId(), result.get(0).getId()),
+                () -> assertTrue(analyticService.findMinValue(result.get(0)).orElse(0) > 3)
+        );
     }
 
     @Test
@@ -155,8 +167,11 @@ public class CustomArrayRepositoryImplTest {
         });
 
         // then
-        assertEquals(1, result.size());
-        assertEquals(array1.getId(), result.get(0).getId());
+        assertAll("Query by max value specification validation",
+                () -> assertEquals(1, result.size()),
+                () -> assertEquals(array1.getId(), result.get(0).getId()),
+                () -> assertTrue(analyticService.findMaxValue(result.get(0)).orElse(0) < 10)
+        );
     }
 
     @Test
@@ -174,8 +189,10 @@ public class CustomArrayRepositoryImplTest {
         });
 
         // then
-        assertEquals(1, result.size());
-        assertEquals(array2.getId(), result.get(0).getId());
+        assertAll("Query by average value specification validation",
+                () -> assertEquals(1, result.size()),
+                () -> assertEquals(array2.getId(), result.get(0).getId()),
+                () -> assertTrue(analyticService.calculateAverageOfElements(result.get(0)).orElse(0.0) > 5)
+        );
     }
-
 }

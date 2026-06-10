@@ -4,7 +4,7 @@ import com.innowise.n1jel.entity.CustomArray;
 
 import java.util.Optional;
 
-public interface AnalyticService {
+public interface StatisticService {
     Optional<Integer> findMinValue(CustomArray intCustomArray);
 
     Optional<Integer> findMaxValue(CustomArray intCustomArray);

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -17,15 +18,14 @@ public class CustomArrayReaderImpl implements CustomArrayReader {
 
     @Override
     public List<String> readAllLinesFromFile(String path) throws CustomArrayException {
+        if (path == null) {
+            log.error("Path is null");
+            throw new CustomArrayException("Path cannot be null");
+        }
+
         try {
-            URL resource = CustomArrayReaderImpl.class.getClassLoader().getResource(path);
-
-            if (resource == null) {
-                log.error("File not found in resources: {}", path);
-                throw new CustomArrayException("File not found: " + path);
-            }
-
-            List<String> lines = Files.readAllLines(Paths.get(resource.toURI()));
+            Path target = getReadablePath(path);
+            List<String> lines = Files.readAllLines(target);
             log.info("File read successfully: {}", path);
             return lines;
 
@@ -33,5 +33,18 @@ public class CustomArrayReaderImpl implements CustomArrayReader {
             log.error("Failed to read file: {}", path, exception);
             throw new CustomArrayException("Failed to read file: " + path, exception);
         }
+    }
+
+    private Path getReadablePath(String path) throws URISyntaxException, CustomArrayException {
+        Path filePath = Paths.get(path);
+
+        if (Files.exists(filePath)) {
+            return filePath;
+        }
+
+        URL resource = CustomArrayReaderImpl.class.getClassLoader().getResource(path);
+        if (resource == null) throw new CustomArrayException("File not found: " + path);
+
+        return Paths.get(resource.toURI());
     }
 }

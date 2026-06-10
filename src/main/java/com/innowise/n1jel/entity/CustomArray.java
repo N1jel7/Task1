@@ -3,108 +3,116 @@ package com.innowise.n1jel.entity;
 import com.innowise.n1jel.exception.CustomArrayException;
 import com.innowise.n1jel.observer.CustomArrayObservable;
 import com.innowise.n1jel.observer.CustomArrayObserver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class CustomArray implements CustomArrayObservable {
 
-    private final UUID id;
-    private final int[] array;
-    private final int length;
+    private static final Logger log = LogManager.getLogger(CustomArray.class);
 
-    private final List<CustomArrayObserver> observers;
+    private final UUID id;
+    private int[] array;
+    private CustomArrayObserver observer;
 
     public CustomArray(int[] array) {
         this.id = UUID.randomUUID();
-        this.observers = new ArrayList<>();
+        this.observer = null;
         if (array == null) {
             this.array = new int[0];
-            this.length = 0;
         } else {
             this.array = array.clone();
-            this.length = array.length;
         }
-    }
-
-    public int[] getArray() {
-        return array.clone();
     }
 
     public UUID getId() {
         return id;
     }
 
-    public List<CustomArrayObserver> getObservers() {
-        return observers;
+    public int getElement(int index) throws CustomArrayException {
+        if (index < 0 || index >= array.length) {
+            throw new CustomArrayException("Index out of bounds: " + index);
+        }
+        return array[index];
+    }
+
+    public int[] getArray() {
+        return array.clone();
+    }
+
+    public int getLength() {
+        return array.length;
+    }
+
+    public boolean isEmpty() {
+        return array.length == 0;
+    }
+
+
+    public Optional<CustomArrayObserver> getObserver() {
+        if (observer == null) {
+            log.debug("No observer attached to array id: {}", id);
+        }
+        return Optional.ofNullable(observer);
     }
 
     public void setElement(int index, int value) throws CustomArrayException {
-        if (index < 0 || index >= length) {
+        if (index < 0 || index >= array.length) {
             throw new CustomArrayException("Index out of bounds: " + index);
         }
         array[index] = value;
         notifyObservers();
     }
 
-    public int getElement(int index) throws CustomArrayException {
-        if (index < 0 || index >= length) {
-            throw new CustomArrayException("Index out of bounds: " + index);
+    public void setArray(int[] array) {
+        this.array = Arrays.copyOf(array, array.length);
+        notifyObservers();
+    }
+
+    @Override
+    public void attachObserver(CustomArrayObserver observer) {
+        this.observer = observer;
+        log.debug("Observer attached to array id: {}", id);
+    }
+
+    @Override
+    public void detachObserver(CustomArrayObserver observer) {
+        if (this.observer == observer) {
+            this.observer = null;
+            log.debug("Observer detached from array id: {}", id);
         }
-        return array[index];
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public boolean isEmpty() {
-        return length == 0;
-    }
-
-    @Override
-    public void attach(CustomArrayObserver observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void detach(CustomArrayObserver observer) {
-        observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-        for (CustomArrayObserver observer : observers) {
+        if (observer != null) {
             observer.customArrayChanged(this);
+        } else {
+            log.debug("Cannot notify: no observer attached to array id: {}", id);
         }
     }
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
 
-        CustomArray that = (CustomArray) object;
-
-        if (length != that.length) return false;
-
-        return Arrays.equals(array, that.array);
+        CustomArray array = (CustomArray) object;
+        return id.equals(array.id);
     }
 
     @Override
     public int hashCode() {
-        int result = Arrays.hashCode(array);
-        result = 31 * result + length;
-        return result;
+        return id.hashCode();
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("IntCustomArray{");
-        sb.append("array=").append(Arrays.toString(array));
-        sb.append(", length=").append(length);
+        final StringBuilder sb = new StringBuilder("CustomArray{");
+        sb.append("id=").append(id);
+        sb.append(", array=").append(Arrays.toString(array));
         sb.append('}');
         return sb.toString();
     }

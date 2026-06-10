@@ -1,15 +1,15 @@
 package com.innowise.n1jel.service.impl;
 
 import com.innowise.n1jel.entity.CustomArray;
-import com.innowise.n1jel.service.AnalyticService;
+import com.innowise.n1jel.service.StatisticService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class AnalyticServiceImpl implements AnalyticService {
+public class StatisticServiceImpl implements StatisticService {
 
-    private static final Logger log = LogManager.getLogger(AnalyticServiceImpl.class);
+    private static final Logger log = LogManager.getLogger(StatisticServiceImpl.class);
 
     @Override
     public Optional<Integer> findMinValue(CustomArray intCustomArray) {

@@ -5,15 +5,10 @@ import com.innowise.n1jel.exception.CustomArrayException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SortServiceImplTest {
-    private SortServiceImpl service;
-
-    @BeforeEach
-    void setUp() {
-        service = new SortServiceImpl();
-    }
+    private final SortServiceImpl service = new SortServiceImpl();
 
     @Test
     void bubbleSortShouldSortArrayInAscendingOrder() throws CustomArrayException {
@@ -25,7 +20,16 @@ public class SortServiceImplTest {
         service.bubbleSort(array);
 
         // then
-        assertArrayEquals(new int[]{1, 2, 5, 8, 9}, array.getArray());
+        int[] expected = {1, 2, 5, 8, 9};
+        int[] actual = array.getArray();
+
+        assertAll("Bubble sort ascending order validation",
+                () -> assertArrayEquals(expected, actual),
+                () -> assertEquals(expected.length, actual.length),
+                () -> assertTrue(actual[0] < actual[actual.length - 1]),
+                () -> assertEquals(1, actual[0]),
+                () -> assertEquals(9, actual[actual.length - 1])
+        );
     }
 
     @Test
@@ -38,7 +42,14 @@ public class SortServiceImplTest {
         service.bubbleSort(array);
 
         // then
-        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, array.getArray());
+        int[] expected = {1, 2, 3, 4, 5};
+        int[] actual = array.getArray();
+
+        assertAll("Bubble sort with already sorted array validation",
+                () -> assertArrayEquals(expected, actual),
+                () -> assertEquals(expected.length, actual.length),
+                () -> assertArrayEquals(data, actual) // Should remain unchanged
+        );
     }
 
     @Test
@@ -51,7 +62,16 @@ public class SortServiceImplTest {
         service.quickSort(array);
 
         // then
-        assertArrayEquals(new int[]{1, 2, 5, 8, 9}, array.getArray());
+        int[] expected = {1, 2, 5, 8, 9};
+        int[] actual = array.getArray();
+
+        assertAll("Quick sort ascending order validation",
+                () -> assertArrayEquals(expected, actual),
+                () -> assertEquals(expected.length, actual.length),
+                () -> assertTrue(actual[0] < actual[actual.length - 1]),
+                () -> assertEquals(1, actual[0]),
+                () -> assertEquals(9, actual[actual.length - 1])
+        );
     }
 
     @Test
@@ -64,6 +84,13 @@ public class SortServiceImplTest {
         service.quickSort(array);
 
         // then
-        assertArrayEquals(new int[]{1, 2, 3, 4, 5}, array.getArray());
+        int[] expected = {1, 2, 3, 4, 5};
+        int[] actual = array.getArray();
+
+        assertAll("Quick sort with already sorted array validation",
+                () -> assertArrayEquals(expected, actual),
+                () -> assertEquals(expected.length, actual.length),
+                () -> assertArrayEquals(data, actual) // Should remain unchanged
+        );
     }
 }

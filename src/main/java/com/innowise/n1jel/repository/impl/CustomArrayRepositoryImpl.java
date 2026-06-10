@@ -38,7 +38,7 @@ public class CustomArrayRepositoryImpl implements CustomArrayRepository {
         log.debug("Adding array to repository: id={}", intCustomArray.getId());
 
         // Observer registration
-        intCustomArray.attach(observer);
+        intCustomArray.attachObserver(observer);
 
         observer.customArrayChanged(intCustomArray);
 
@@ -50,7 +50,7 @@ public class CustomArrayRepositoryImpl implements CustomArrayRepository {
         log.debug("Removing array from repository: id={}", intCustomArray.getId());
 
         // Unsubscribe observer
-        intCustomArray.detach(observer);
+        intCustomArray.detachObserver(observer);
 
         CustomArrayWarehouseImpl.getInstance().removeStatistic(intCustomArray.getId());
 

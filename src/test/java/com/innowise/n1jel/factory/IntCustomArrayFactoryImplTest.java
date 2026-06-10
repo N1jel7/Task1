@@ -1,21 +1,15 @@
 package com.innowise.n1jel.factory;
 
-
 import com.innowise.n1jel.entity.CustomArray;
 import com.innowise.n1jel.exception.CustomArrayException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class IntCustomArrayFactoryImplTest {
 
-    private CustomArrayFactoryImpl factory;
+    private final CustomArrayFactoryImpl factory = new CustomArrayFactoryImpl();
 
-    @BeforeEach
-    void setUp() {
-        factory = new CustomArrayFactoryImpl();
-    }
 
     @Test
     void shouldCreateIntCustomArrayWithValidData() throws CustomArrayException {
@@ -26,9 +20,11 @@ public class IntCustomArrayFactoryImplTest {
         CustomArray result = factory.createCustomArray(data);
 
         // then
-        assertNotNull(result);
-        assertEquals(5, result.getLength());
-        assertArrayEquals(data, result.getArray());
+        assertAll("Create custom array with valid data validation",
+                () -> assertNotNull(result),
+                () -> assertEquals(5, result.getLength()),
+                () -> assertArrayEquals(data, result.getArray())
+        );
     }
 
     @Test
@@ -50,5 +46,4 @@ public class IntCustomArrayFactoryImplTest {
         //then
         assertEquals(0, result.getLength());
     }
-
 }

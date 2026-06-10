@@ -6,9 +6,9 @@ import com.innowise.n1jel.factory.CustomArrayFactoryImpl;
 import com.innowise.n1jel.parser.CustomArrayParserImpl;
 import com.innowise.n1jel.reader.CustomArrayReader;
 import com.innowise.n1jel.reader.CustomArrayReaderImpl;
-import com.innowise.n1jel.service.AnalyticService;
+import com.innowise.n1jel.service.StatisticService;
 import com.innowise.n1jel.service.SortService;
-import com.innowise.n1jel.service.impl.AnalyticServiceImpl;
+import com.innowise.n1jel.service.impl.StatisticServiceImpl;
 import com.innowise.n1jel.service.impl.SortServiceImpl;
 import com.innowise.n1jel.validator.CustomArrayLineValidatorImpl;
 import org.apache.logging.log4j.LogManager;
@@ -50,7 +50,7 @@ public class Main {
         }
 
         // 3. Process arrays
-        AnalyticService analyticService = new AnalyticServiceImpl();
+        StatisticService analyticService = new StatisticServiceImpl();
         SortService sortService = new SortServiceImpl();
 
         for (CustomArray array : arrays) {

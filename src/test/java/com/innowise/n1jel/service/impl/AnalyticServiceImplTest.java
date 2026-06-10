@@ -1,7 +1,6 @@
 package com.innowise.n1jel.service.impl;
 
 import com.innowise.n1jel.entity.CustomArray;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -9,12 +8,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AnalyticServiceImplTest {
-    private AnalyticServiceImpl service;
 
-    @BeforeEach
-    void setUp() {
-        service = new AnalyticServiceImpl();
-    }
+    private final StatisticServiceImpl service = new StatisticServiceImpl();
+    ;
 
     @Test
     void shouldFindMinValueInArray() {
@@ -26,8 +22,10 @@ public class AnalyticServiceImplTest {
         Optional<Integer> result = service.findMinValue(array);
 
         // then
-        assertTrue(result.isPresent());
-        assertEquals(1, result.get());
+        assertAll("Find min value validation",
+                () -> assertTrue(result.isPresent()),
+                () -> assertEquals(1, result.get())
+        );
     }
 
     @Test
@@ -39,7 +37,10 @@ public class AnalyticServiceImplTest {
         Optional<Integer> result = service.findMinValue(array);
 
         // then
-        assertFalse(result.isPresent());
+        assertAll("Null array handling for min value",
+                () -> assertFalse(result.isPresent()),
+                () -> assertTrue(result.isEmpty())
+        );
     }
 
     @Test
@@ -52,8 +53,10 @@ public class AnalyticServiceImplTest {
         Optional<Integer> result = service.findMaxValue(array);
 
         // then
-        assertTrue(result.isPresent());
-        assertEquals(9, result.get());
+        assertAll("Find max value validation",
+                () -> assertTrue(result.isPresent()),
+                () -> assertEquals(9, result.get())
+        );
     }
 
     @Test
@@ -65,7 +68,10 @@ public class AnalyticServiceImplTest {
         Optional<Integer> result = service.findMaxValue(array);
 
         // then
-        assertFalse(result.isPresent());
+        assertAll("Null array handling for max value",
+                () -> assertFalse(result.isPresent()),
+                () -> assertTrue(result.isEmpty())
+        );
     }
 
     @Test
@@ -78,8 +84,10 @@ public class AnalyticServiceImplTest {
         Optional<Integer> result = service.calculateSumOfElements(array);
 
         // then
-        assertTrue(result.isPresent());
-        assertEquals(15, result.get());
+        assertAll("Calculate sum validation",
+                () -> assertTrue(result.isPresent()),
+                () -> assertEquals(15, result.get())
+        );
     }
 
     @Test
@@ -91,7 +99,10 @@ public class AnalyticServiceImplTest {
         Optional<Integer> result = service.calculateSumOfElements(array);
 
         // then
-        assertFalse(result.isPresent());
+        assertAll("Null array handling for sum calculation",
+                () -> assertFalse(result.isPresent()),
+                () -> assertTrue(result.isEmpty())
+        );
     }
 
     @Test
@@ -104,8 +115,11 @@ public class AnalyticServiceImplTest {
         Optional<Double> result = service.calculateAverageOfElements(array);
 
         // then
-        assertTrue(result.isPresent());
-        assertEquals(3.0, result.get(), 0.001);
+        assertAll("Calculate average validation",
+                () -> assertTrue(result.isPresent()),
+                () -> assertEquals(3.0, result.get(), 0.001),
+                () -> assertTrue(result.get() > 0)
+        );
     }
 
     @Test
@@ -117,6 +131,9 @@ public class AnalyticServiceImplTest {
         Optional<Double> result = service.calculateAverageOfElements(array);
 
         // then
-        assertFalse(result.isPresent());
+        assertAll("Null array handling for average calculation",
+                () -> assertFalse(result.isPresent()),
+                () -> assertTrue(result.isEmpty())
+        );
     }
 }

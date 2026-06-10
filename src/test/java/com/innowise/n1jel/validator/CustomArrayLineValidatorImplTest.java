@@ -1,19 +1,12 @@
 package com.innowise.n1jel.validator;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CustomArrayLineValidatorImplTest {
-    private CustomArrayLineValidatorImpl validator;
-
-    @BeforeEach
-    void setUp() {
-        // given
-        validator = new CustomArrayLineValidatorImpl();
-    }
+    private final CustomArrayLineValidatorImpl validator = new CustomArrayLineValidatorImpl();
 
     @Test
     void shouldReturnTrueForValidLineWithCommas() {

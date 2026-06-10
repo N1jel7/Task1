@@ -25,10 +25,12 @@ public class CustomArrayTest {
         CustomArray result = new CustomArray(data);
 
         // then
-        assertNotNull(result.getId());
-        assertEquals(3, result.getLength());
-        assertFalse(result.isEmpty());
-        assertArrayEquals(data, result.getArray());
+        assertAll("Create array with valid data validation",
+                () -> assertNotNull(result.getId()),
+                () -> assertEquals(3, result.getLength()),
+                () -> assertFalse(result.isEmpty()),
+                () -> assertArrayEquals(data, result.getArray())
+        );
     }
 
     @Test
@@ -40,8 +42,10 @@ public class CustomArrayTest {
         CustomArray result = new CustomArray(data);
 
         // then
-        assertEquals(0, result.getLength());
-        assertTrue(result.isEmpty());
+        assertAll("Create empty array when null provided validation",
+                () -> assertEquals(0, result.getLength()),
+                () -> assertTrue(result.isEmpty())
+        );
     }
 
     @Test
@@ -65,27 +69,29 @@ public class CustomArrayTest {
     void shouldSetElementAndNotifyObservers() throws CustomArrayException {
         // given
         TestObserver observer = new TestObserver();
-        array.attach(observer);
+        array.attachObserver(observer);
 
         // when
         array.setElement(0, 100);
 
         // then
-        assertEquals(100, array.getElement(0));
-        assertTrue(observer.isNotified());
+        assertAll("Set element and notify observers validation",
+                () -> assertEquals(100, array.getElement(0)),
+                () -> assertTrue(observer.isNotified())
+        );
     }
 
     @Test
-    void shouldAttachAndDetachObservers() {
+    void shouldAttachObserverAndDetachObserverObservers() {
         // given
         TestObserver observer = new TestObserver();
 
         // when
-        array.attach(observer);
-        array.detach(observer);
+        array.attachObserver(observer);
+        array.detachObserver(observer);
 
         // then
-        assertFalse(array.getObservers().contains(observer));
+        assertFalse(array.getObserver().isPresent());
     }
 
     @Test

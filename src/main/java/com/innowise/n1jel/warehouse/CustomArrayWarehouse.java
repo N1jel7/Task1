@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomArrayWarehouse {
-    void put(UUID id, ArrayStatistic calculation);
+    void putStatistic(UUID id, ArrayStatistic calculation);
 
     Optional<ArrayStatistic> getStatistic(UUID id);
 
