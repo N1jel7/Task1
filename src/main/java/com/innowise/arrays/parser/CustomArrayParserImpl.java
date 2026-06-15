@@ -1,5 +1,7 @@
 package com.innowise.arrays.parser;
 
+import com.innowise.arrays.validator.CustomArrayLineValidator;
+import com.innowise.arrays.validator.CustomArrayLineValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -7,14 +9,24 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class CustomArrayParserImpl implements CustomArrayParser {
-    private static final Logger log = LogManager.getLogger(CustomArrayParserImpl.class);
 
+    private static final Logger log = LogManager.getLogger(CustomArrayParserImpl.class);
     private static final Pattern SEPARATOR_PATTERN = Pattern.compile("[,;\\-\\s]+");
+    private final CustomArrayLineValidator validator;
+
+    public CustomArrayParserImpl() {
+        this.validator = new CustomArrayLineValidatorImpl();
+    }
 
     @Override
     public Optional<int[]> parseIntFromString(String line) {
         if (line == null || line.trim().isEmpty()) {
             log.debug("Line is null or empty");
+            return Optional.empty();
+        }
+
+        if (!validator.isValidLine(line)) {
+            log.debug("Line contains invalid characters: {}", line);
             return Optional.empty();
         }
 
